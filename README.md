@@ -36,18 +36,62 @@ The app is developed in nodejs with a mongodb database, for running the app in k
 
 # Deploying on Kubernetes
 Defaults variables are defined in the Docker image. These can be changed to customize the app deployment. Check the nodeapp.yml or mongodb.yml to change the variables. To access the app either deploy an ingress or use nodeport as defined in the manifests 
+
+
    
  ### Deploying mongodb
 
 run command
 ```
-    kubectl apply -f mongodb.yml
+    kubectl apply -f kubernetes/mongodb.yml
+```
+
+expected output
+
+```
+serviceaccount/mongodb created
+secret/mongodb created
+service/mongodb created
+deployment.apps/mongodb created
 ```
 ### Deploying NodeApp
 
 run command
 ```
-    kubectl apply -f mongodb.yml
+    kubectl apply -f  kubernetes/mongodb.yml
+```
+
+expected output
+```
+service/node-http created
+service/node-app-nodeport created
+deployment.apps/node-app created
+ingress.extensions/node-app created
+```
+
+
+K8 services
+```
+kubectl get all
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/mongodb-57495cf44c-9kxqg    1/1     Running   0          6m40s
+pod/node-app-7b787fcd56-x4cn6   1/1     Running   0          6m5s
+
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes          ClusterIP   10.96.0.1        <none>        443/TCP          9m41s
+service/mongodb             ClusterIP   10.96.156.39     <none>        27017/TCP        6m40s
+service/node-app-nodeport   NodePort    10.108.254.120   <none>        8080:31000/TCP   6m5s
+service/node-http           ClusterIP   10.103.66.100    <none>        8080/TCP         6m5s
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mongodb    1/1     1            1           6m40s
+deployment.apps/node-app   1/1     1            1           6m5s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/mongodb-57495cf44c    1         1         1       6m40s
+replicaset.apps/node-app-7b787fcd56   1         1         1       6m5s
+
+
 ```
 
 # Running the app
