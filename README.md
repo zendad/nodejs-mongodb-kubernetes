@@ -101,7 +101,7 @@ Access the app through the nodeport or ingress on your browser.
 
 This message should show
 ```
-You are registered and can now login
+User registered and Please login
 ```
 2. if the user was successfully added to the database and the credetials are correct, when you login the following message shoud appear on the browser
 ```

@@ -12,7 +12,7 @@ router.get('/register', function(req, res){
 
 // Login
 router.get('/login', function(req, res){
-	res.render('login',{'message':'Hello world'});
+	res.render('login',{'message':''});
 });
 //welcome
 // Register User
@@ -50,7 +50,7 @@ router.post('/register', function(req, res){
 			console.log(user);
 		});
 
-		req.flash('success_msg', 'You are registered and can now login');
+		req.flash('success_msg', 'User registered and Please login');
 
 		res.redirect('/users/login');
 	}
