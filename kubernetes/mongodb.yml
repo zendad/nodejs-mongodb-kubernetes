@@ -9,16 +9,6 @@ secrets:
   - name: mongodb
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-  name: mongodb
-  labels:
-    app: mongodb
-type: Opaque
-data:
-  mongodb-root-password: "bkF2VlVzOXFWTw=="
----
-apiVersion: v1
 kind: Service
 metadata:
   name: mongodb
@@ -62,11 +52,6 @@ spec:
             runAsNonRoot: true
             runAsUser: 1001
           env:
-            - name: MONGODB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongodb
-                  key: mongodb-root-password
             - name: MONGODB_SYSTEM_LOG_VERBOSITY
               value: "0"
             - name: MONGODB_DISABLE_SYSTEM_LOG
@@ -109,3 +94,20 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+  annotations:
+spec:
+  rules:
+  - host: mongo.dereckzenda.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: mongodb
+          servicePort: mongodb
