@@ -21,7 +21,7 @@ MONGODB_ENABLE_DIRECTORY_PER_DB
 ```
 
 # Kubernetes Version Compatibility
-This code has been tested on the following versions of kubernetes, I cannot guarantee it will work on any other version, without modifications.
+This app has been tested on the following versions of kubernetes, I cannot guarantee it will work on any other version, without modifications.
 ```
     Kubernetes 1.14	
     Kubernetes 1.15
