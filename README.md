@@ -51,7 +51,10 @@ run command
 ```
 
 # Running the app
-Access the app through the nodeport or ingress on your browser. To add user users to the database, register a user. Login in with the created user. if the user was successfully added to the database and the credetials are correct, when you login the following message shoud appear on the browser
+Access the app through the nodeport or ingress on your browser. 
+
+1. To add users to the app, register a user. Login in with the created user. , you can also check the logs for the app to iff is the user was created succefully or check  the database.
+2. if the user was successfully added to the database and the credetials are correct, when you login the following message shoud appear on the browser
 ```
 Congratulations, Your login is successful
 ```
