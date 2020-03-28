@@ -40,6 +40,7 @@ Defaults variables are defined in the Docker image. These can be changed to cust
 
    
  ### Deploying mongodb
+Note - Mongodb is not using a persistent volume, should it restart, all data will be lost, You can enable the use of persistent volume, check details [here](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
 run command
 ```
